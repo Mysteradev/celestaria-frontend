@@ -13,7 +13,7 @@ export const actions = {
   GET_ALL_VIDEOS_LIST: function ({commit}) {
     this.$axios.$get('https://jsonplaceholder.typicode.com/photos')
       .then((response) => {
-        commit('SET_ALL_VIDEOS_LIST', { list: response.data })
+        commit('SET_ALL_VIDEOS_LIST', { list: response })
       }, (err) => {
         console.log(`An error occured ${err}`)
       });
