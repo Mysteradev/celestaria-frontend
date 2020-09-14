@@ -1,9 +1,23 @@
 <template>
-  <div class="column is-4 video-card">
-    <h2>{{title}}</h2>
-    <div class="inner-card">
-      <img class="image thumbnail" :src="imageUrl" alt="Image de présentation" @click="openLightbox">
-      <span class="openIcon">&circlearrowleft;</span>
+  <div class="column is-3">
+    <div class="card" @click="setActive(id)" :class="{'selected': this.$store.getters.activeVideo === id}">
+      <div class="card-image">
+        <figure class="image is-5by3">
+          <img :src="thumbnailUrl" alt="Thumbnail image">
+        </figure>
+      </div>
+      <div class="card-content">
+        <div class="media">
+          <div class="media-content">
+            <p class="title is-5">{{ title }}</p>
+          </div>
+          <div class="media-right clickable">
+            <span class="icon has-text-success" @click="openLightbox">
+              <i class="">⇱</i>
+            </span>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -12,57 +26,46 @@
     export default {
       name: "Video",
       props: {
+        id: {
+          type: Number,
+          required: true
+        },
         title: {
           type: String,
           required: true
         },
-        imageUrl: {
+        thumbnailUrl: {
           type: String,
           required: true
         }
       },
       methods: {
         openLightbox() {
-          this.$emit("event-open-lightbox")
+          this.$emit("event-open-lightbox");
+        },
+        setActive(index) {
+          this.$store.commit('SET_ACTIVE_VIDEO', index);
         }
       }
     }
 </script>
 
 <style lang="scss" scoped>
-.video-card {
-  transition: .5s all;
-  border-radius: 5px;
+  .card {
+    height: 100%;
+    transition: .5s;
 
-  .inner-card {
-    -webkit-box-shadow: 0px 10px 20px 0px rgba(0,0,0,0.75);
-    -moz-box-shadow: 0px 10px 20px 0px rgba(0,0,0,0.75);
-    box-shadow: 0px 10px 20px 0px rgba(0,0,0,0.75);
-    cursor: pointer;
-
-    .thumbnail {
-      max-height: 250px;
-      width: 100%;
+    &:hover {
+      transform: translateY(-5px);
     }
 
-    .openIcon {
-      position: absolute;
-      display: block;
-      text-align: center;
-      line-height: 39px;
-      bottom: -20px;
-      right: -20px;
-      background: #46B04B;
-      height: 40px;
-      width: 40px;
-      border-radius: 50%;
-      color: #FFFFFF;
+    .clickable {
       cursor: pointer;
     }
   }
 
-  &:hover {
-    transform: translateY(-5px);
+  .selected {
+    -webkit-box-shadow: 0 10px 13px -7px #000000, 5px 5px 15px 5px rgba(0,0,0,0);
+    box-shadow: 0 10px 13px -7px #000000, 5px 5px 15px 5px rgba(0,0,0,0);
   }
-}
 </style>

@@ -1,8 +1,33 @@
 <template>
   <div class="videos-list">
-    <h1 class="title is-1">Choisir le chapitre 1...</h1>
+    <div class="columns">
+      <div class="column is-4">
+        <h1 class="title">Choisir le chapitre 1...</h1>
+      </div>
+      <div class="column is-offset-6 is-2">
+        <button class="button is-primary is-light is-pulled-right" @click="nextChapter">Suivant &rarr;</button>
+      </div>
+    </div>
     <div class="columns is-multiline">
-      <Video v-for="video in videos" :key="video.id" :imageUrl="video.imageUrl" :videoUrl="video.videoUrl" :title="video.title" @event-open-lightbox="openLightboxTest(video.url)" v-lightbox/>
+      <Video v-for="video in videos" :key="video.id" :id="video.id" :thumbnailUrl="video.download_url" :videoUrl="video.videoUrl" :title="video.author" @event-open-lightbox="openLightbox" v-lightbox/>
+      <content-loader
+        :width="1368"
+        :height="548"
+        :speed="2"
+        primaryColor="#f3f3f3"
+        secondaryColor="#ecebeb"
+        v-if="isLoading"
+      >
+        <rect x="12" y="0" rx="3" ry="3" width="318" height="262" />
+        <rect x="354" y="0" rx="3" ry="3" width="318" height="262" />
+        <rect x="696" y="0" rx="3" ry="3" width="318" height="262" />
+        <rect x="1038" y="0" rx="3" ry="3" width="318" height="262" />
+
+        <rect x="12" y="286" rx="3" ry="3" width="318" height="262" />
+        <rect x="354" y="286" rx="3" ry="3" width="318" height="262" />
+        <rect x="696" y="286" rx="3" ry="3" width="318" height="262" />
+        <rect x="1038" y="286" rx="3" ry="3" width="318" height="262" />
+      </content-loader>
     </div>
     <Lightbox v-show="isOpen" @event-close-lightbox="closeLightBox"/>
   </div>
@@ -10,6 +35,7 @@
 
 <script>
   import { mapState } from 'vuex';
+  import { ContentLoader } from 'vue-content-loader';
   import Video from "./Video";
   import Lightbox from "@/components/lightbox/Lightbox";
 
@@ -17,67 +43,30 @@
     name: "VideosList",
     components: {
       Video,
-      Lightbox
+      Lightbox,
+      ContentLoader
     },
     data() {
       return {
         isOpen: false,
-        videos: [
-          {
-            "albumId": 1,
-            "id": 1,
-            "title": "accusamus beatae ad facilis cum similique qui sunt",
-            "imageUrl": "https://via.placeholder.com/600/92c952",
-            "thumbnailUrl": "https://via.placeholder.com/150/92c952",
-            "videoUrl": "https://picsum.photos/id/1005/200/300"
-          },
-          {
-            "albumId": 1,
-            "id": 2,
-            "title": "reprehenderit est deserunt velit ipsam",
-            "imageUrl": "https://via.placeholder.com/600/771796",
-            "thumbnailUrl": "https://via.placeholder.com/150/771796",
-            "videoUrl": "https://picsum.photos/id/1006/200/300"
-          },
-          {
-            "albumId": 1,
-            "id": 3,
-            "title": "officia porro iure quia iusto qui ipsa ut modi",
-            "imageUrl": "https://via.placeholder.com/600/24f355",
-            "thumbnailUrl": "https://via.placeholder.com/150/24f355",
-            "videoUrl": "https://picsum.photos/id/1/200/300"
-          },
-          {
-            "albumId": 1,
-            "id": 4,
-            "title": "culpa odio esse rerum omnis laboriosam voluptate",
-            "imageUrl": "https://via.placeholder.com/600/d32776",
-            "thumbnailUrl": "https://via.placeholder.com/150/d32776",
-            "videoUrl": "https://picsum.photos/id/1013/200/300"
-          },
-          {
-            "albumId": 1,
-            "id": 5,
-            "title": "natus nisi omnis corporis facere molestiae rerum in",
-            "imageUrl": "https://via.placeholder.com/600/f66b97",
-            "thumbnailUrl": "https://via.placeholder.com/150/f66b97",
-            "videoUrl": "https://picsum.photos/id/1011/200/300"
-          },
-        ]
       }
     },
     mounted() {
-      // this.$store.dispatch('GET_ALL_VIDEOS_LIST');
+      this.$store.dispatch('GET_ALL_VIDEOS_LIST');
     },
-    // computed: mapState([
-    //   'videos'
-    // ]),
+    computed: mapState([
+      'videos',
+      'isLoading'
+    ]),
     methods: {
-      openLightboxTest: function(url) {
+      openLightbox: function() {
         this.isOpen = true;
       },
       closeLightBox: function() {
         this.isOpen = false;
+      },
+      nextChapter: function () {
+
       }
     }
   }

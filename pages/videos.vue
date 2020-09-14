@@ -1,10 +1,23 @@
 <template>
-  <div class="section">
-    <div class="container">
-      <VideosList/>
+  <div class="videos-creator">
+    <section class="hero is-primary is-medium is-rounded">
+      <div class="hero-body">
+        <div class="container">
+          <h1 class="is-1 title has-text-dark">
+            Créez votre film...
+          </h1>
+          <h2 class="subtitle has-text-dark">
+            Choisissez votre chapitre 1
+          </h2>
+        </div>
+      </div>
+    </section>
+    <div class="section">
+      <div class="container">
+        <VideosList/>
+      </div>
     </div>
   </div>
-
 </template>
 
 <script>
@@ -15,6 +28,9 @@
   }
 </script>
 
-<style scoped>
-
+<style lang="scss" scoped>
+  .hero {
+    background: url("https://i.picsum.photos/id/1018/3914/2935.jpg?hmac=3N43cQcvTE8NItexePvXvYBrAoGbRssNMpuvuWlwMKg") center;
+    background-size: cover;
+  }
 </style>
