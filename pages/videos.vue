@@ -1,13 +1,13 @@
 <template>
   <div class="videos-creator">
-    <section class="hero is-primary is-medium is-rounded">
+    <section class="hero is-primary is-medium">
       <div class="hero-body">
         <div class="container">
           <h1 class="is-1 title has-text-dark">
             Créez votre film...
           </h1>
           <h2 class="subtitle has-text-dark">
-            Choisissez votre chapitre 1
+            Choisissez votre chapitre {{this.chapter}}
           </h2>
         </div>
       </div>
@@ -21,10 +21,15 @@
 </template>
 
 <script>
+  import { mapState } from 'vuex';
   import VideosList from "../components/videos/VideosList";
+
   export default {
     name: "videos",
-    components: {VideosList}
+    components: {VideosList},
+    computed: mapState([
+      'chapter',
+    ]),
   }
 </script>
 

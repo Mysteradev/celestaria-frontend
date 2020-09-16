@@ -1,14 +1,11 @@
 <template>
   <div class="videos-list">
     <div class="columns">
-      <div class="column is-4">
-        <h1 class="title">Choisir le chapitre 1...</h1>
-      </div>
-      <div class="column is-offset-6 is-2">
-        <button class="button is-primary is-light is-pulled-right" @click="nextChapter">Suivant &rarr;</button>
+      <div class="column is-12">
+        <button class="button is-primary is-light is-pulled-right" v-if="chapter <= 5" @click="nextChapter" :disabled="!!!this.activeVideo">Suivant &rarr;</button>
       </div>
     </div>
-    <div class="columns is-multiline">
+    <div class="columns is-multiline" v-if="!showRecap">
       <Video v-for="video in videos" :key="video.id" :id="video.id" :thumbnailUrl="video.download_url" :videoUrl="video.videoUrl" :title="video.author" @event-open-lightbox="openLightbox" v-lightbox/>
       <content-loader
         :width="1368"
@@ -30,18 +27,22 @@
       </content-loader>
     </div>
     <Lightbox v-show="isOpen" @event-close-lightbox="closeLightBox"/>
+
+    <RecapVideoMaker v-if="showRecap"/>
   </div>
 </template>
 
 <script>
-  import { mapState } from 'vuex';
+  import { mapState, mapMutations, mapActions } from 'vuex';
   import { ContentLoader } from 'vue-content-loader';
   import Video from "./Video";
   import Lightbox from "@/components/lightbox/Lightbox";
+  import RecapVideoMaker from "@/components/videos/RecapVideoMaker";
 
   export default {
     name: "VideosList",
     components: {
+      RecapVideoMaker,
       Video,
       Lightbox,
       ContentLoader
@@ -49,16 +50,26 @@
     data() {
       return {
         isOpen: false,
+        showRecap: false
       }
     },
     mounted() {
-      this.$store.dispatch('GET_ALL_VIDEOS_LIST');
+      this.getAllVideosList();
     },
     computed: mapState([
       'videos',
-      'isLoading'
+      'isLoading',
+      'chapter',
+      'activeVideo'
     ]),
     methods: {
+      ...mapMutations({
+        setNewCurrentChapter: 'SET_NEW_CURRENT_CHAPTER',
+        saveToSelectedVideo: 'SAVE_TO_SELECTED_VIDEOS'
+      }),
+      ...mapActions({
+        getAllVideosList: 'GET_CHAPTER_VIDEOS_LIST'
+      }),
       openLightbox: function() {
         this.isOpen = true;
       },
@@ -66,7 +77,17 @@
         this.isOpen = false;
       },
       nextChapter: function () {
-
+        if(this.activeVideo) {
+          if(this.chapter < 5) {
+            this.saveToSelectedVideo(this.activeVideo);
+            this.setNewCurrentChapter();
+          } else {
+            this.setNewCurrentChapter();
+            this.showRecap = true;
+          }
+        } else {
+          throw new TypeError('You should provide a valid activeVideo param.');
+        }
       }
     }
   }
