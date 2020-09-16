@@ -37,7 +37,7 @@
   import { ContentLoader } from 'vue-content-loader';
   import Video from "./Video";
   import Lightbox from "@/components/lightbox/Lightbox";
-  import RecapVideoMaker from "@/components/videos/RecapVideoMaker";
+  import RecapVideoMaker from "@/components/videoMaker/RecapVideoMaker";
 
   export default {
     name: "VideosList",

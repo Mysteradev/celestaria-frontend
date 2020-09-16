@@ -22,7 +22,7 @@
 
 <script>
   import { mapState } from 'vuex';
-  import VideosList from "../components/videos/VideosList";
+  import VideosList from "../components/videoMaker/VideosList";
 
   export default {
     name: "videos",
