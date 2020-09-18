@@ -3,7 +3,8 @@
     <div class="field">
       <label for="filmTitle" class="label">Veuillez saisir un titre pour votre nouveau film</label>
       <div class="control">
-        <input class="input" :class="{'is-danger': this.inputContent.length === 0, 'is-success': this.inputContent.length > 3}" v-model="inputContent" type="text" placeholder="Une histoire de clés..." id="filmTitle">
+        <input class="input" :class="{'is-danger': this.inputContent.trim().length === 0, 'is-success': this.inputContent.trim().length > 3}" v-model="inputContent" type="text" placeholder="Une histoire de clés..." id="filmTitle">
+        <small id="filmTitleIndicator" v-show="this.inputContent.trim().length < 3">Le titre doit contenir plus de trois caractères...</small>
       </div>
     </div>
 
@@ -47,7 +48,7 @@ export default {
      * @returns {boolean}
      */
     isValid: function() {
-      return this.inputContent.length > 3 && this.hasAcceptedCondition;
+      return this.inputContent.trim().length > 3 && this.hasAcceptedCondition;
     }
   }
 }
