@@ -38,7 +38,7 @@ export default {
   },
   methods: {
     ...mapActions({
-      sendNewVideoToApi: 'SEND_NEW_MOVIE'
+      sendNewVideoToApi: 'videoMaker/SEND_NEW_MOVIE'
     })
   },
   computed: {

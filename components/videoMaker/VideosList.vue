@@ -13,7 +13,7 @@
         :speed="2"
         primaryColor="#f3f3f3"
         secondaryColor="#ecebeb"
-        v-if="isLoading"
+        v-if="videoMaker.isLoading"
       >
         <rect x="12" y="0" rx="3" ry="3" width="318" height="262" />
         <rect x="354" y="0" rx="3" ry="3" width="318" height="262" />
@@ -57,18 +57,18 @@
       this.getAllVideosList();
     },
     computed: mapState([
-      'videos',
-      'isLoading',
-      'chapter',
-      'activeVideo'
+      'videoMaker/videos',
+      'videoMaker/isLoading',
+      'videoMaker/chapter',
+      'videoMaker/activeVideo'
     ]),
     methods: {
       ...mapMutations({
-        setNewCurrentChapter: 'SET_NEW_CURRENT_CHAPTER',
-        saveToSelectedVideo: 'SAVE_TO_SELECTED_VIDEOS'
+        setNewCurrentChapter: 'videoMaker/SET_NEW_CURRENT_CHAPTER',
+        saveToSelectedVideo: 'videoMaker/SAVE_TO_SELECTED_VIDEOS'
       }),
       ...mapActions({
-        getAllVideosList: 'GET_CHAPTER_VIDEOS_LIST'
+        getAllVideosList: 'videoMaker/GET_CHAPTER_VIDEOS_LIST'
       }),
       openLightbox: function() {
         this.isOpen = true;
