@@ -1,11 +1,11 @@
 <template>
   <div class="container">
-    <div class="columns ml-3 mr-3 mt-6 mb-6" >
-      <div class="clomun">
-        <h3 class="is-size-3">Retrouver ici des films d'autres utilisateurs</h3>
+    <div class="columns">
+      <div class="column">
+        <h3 class="is-size-3 title">Retrouver ici des films d'autres utilisateurs</h3>
       </div>
     </div>
-    <div class="columns ml-3 mr-3 mt-6 mb-6" >
+    <div class="columns" >
       <div class="column" v-for="video in videos">
         <p class="has-text-centered">{{ video.author }}</p>
         <a :href="video.download_url">
@@ -36,7 +36,8 @@ export default {
 </script>
 
 <style scoped>
-.image-home{
-  height: 299px;
+.line{
+  border-bottom: blueviolet solid 4px;
+  border-radius: 4px;
 }
 </style>
