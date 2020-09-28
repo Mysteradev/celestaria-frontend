@@ -37,7 +37,7 @@
   import { ContentLoader } from 'vue-content-loader';
   import Video from "./Video";
   import Lightbox from "@/components/lightbox/Lightbox";
-  import RecapVideoMaker from "@/components/videoMaker/RecapVideoMaker";
+  import RecapVideoMaker from "@/components/movieMaker/RecapVideoMaker";
 
   export default {
     name: "VideosList",
@@ -57,18 +57,18 @@
       this.getAllVideosList();
     },
     computed: mapGetters({
-      isLoading: 'videoMaker/getIsLoading',
-      videos: 'videoMaker/getVideos',
-      activeVideo: 'videoMaker/getActiveVideo',
-      chapter: 'videoMaker/getChapter'
+      isLoading: 'movieMaker/getIsLoading',
+      videos: 'movieMaker/getVideos',
+      activeVideo: 'movieMaker/getActiveVideo',
+      chapter: 'movieMaker/getChapter'
     }),
     methods: {
       ...mapMutations({
-        setNewCurrentChapter: 'videoMaker/SET_NEW_CURRENT_CHAPTER',
-        saveToSelectedVideo: 'videoMaker/SAVE_TO_SELECTED_VIDEOS'
+        setNewCurrentChapter: 'movieMaker/SET_NEW_CURRENT_CHAPTER',
+        saveToSelectedVideo: 'movieMaker/SAVE_TO_SELECTED_VIDEOS'
       }),
       ...mapActions({
-        getAllVideosList: 'videoMaker/GET_CHAPTER_VIDEOS_LIST'
+        getAllVideosList: 'movieMaker/GET_CHAPTER_VIDEOS_LIST'
       }),
       openLightbox: function() {
         this.isOpen = true;
