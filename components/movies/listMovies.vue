@@ -1,19 +1,21 @@
 <template>
   <div class="list-movies">
     <div class="columns is-multiline">
-      <Video v-for="movie in movies" :key="movie.id" :id="movie.id" :thumbnailUrl="movie.download_url" :videoUrl="movie.videoUrl" :title="movie.author" />
+      <MovieCard v-for="movie in movies" :key="movie.id" :id="movie.id" :thumbnailUrl="movie.download_url" :videoUrl="movie.videoUrl" :title="movie.author" />
     </div>
   </div>
 </template>
 
 <script>
-import Video from "@/components/movieMaker/Video";
+import Video from "@/components/movieMaker/Chapter";
 import { mapGetters, mapActions } from "vuex";
 import Pagination from "@/components/movies/Pagination";
+import MovieCard from "@/components/shared/movie/movieCard";
 
 export default {
   name: "listMovies",
   components: {
+    MovieCard,
     Pagination,
     Video
   },

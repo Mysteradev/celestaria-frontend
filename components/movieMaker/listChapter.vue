@@ -6,7 +6,7 @@
       </div>
     </div>
     <div class="columns is-multiline" v-if="!showRecap">
-      <Video v-for="video in videos" :key="video.id" :id="video.id" :thumbnailUrl="video.download_url" :videoUrl="video.videoUrl" :title="video.author" :show-fullscreen-button="true" @event-open-lightbox="openLightbox" v-lightbox/>
+      <Chapter v-for="chapter in chapters" :key="chapter.id" :id="chapter.id" :thumbnailUrl="chapter.download_url" :videoUrl="chapter.videoUrl" :title="chapter.author" :show-fullscreen-button="true" @event-open-lightbox="openLightbox" v-lightbox/>
       <content-loader
         :width="1368"
         :height="548"
@@ -35,15 +35,15 @@
 <script>
   import {mapMutations, mapActions, mapGetters} from 'vuex';
   import { ContentLoader } from 'vue-content-loader';
-  import Video from "./Video";
+  import Chapter from "./Chapter";
   import Lightbox from "@/components/lightbox/Lightbox";
-  import RecapVideoMaker from "@/components/movieMaker/RecapVideoMaker";
+  import RecapVideoMaker from "@/components/movieMaker/RecapMovieMaker";
 
   export default {
     name: "VideosList",
     components: {
       RecapVideoMaker,
-      Video,
+      Chapter,
       Lightbox,
       ContentLoader
     },
@@ -53,12 +53,12 @@
         showRecap: false
       }
     },
-    mounted() {
+    created() {
       this.getAllVideosList();
     },
     computed: mapGetters({
       isLoading: 'movieMaker/getIsLoading',
-      videos: 'movieMaker/getVideos',
+      chapters: 'movieMaker/getVideos',
       activeVideo: 'movieMaker/getActiveVideo',
       chapter: 'movieMaker/getChapter'
     }),

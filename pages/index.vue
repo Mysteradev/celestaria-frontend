@@ -83,20 +83,20 @@
         </div>
       </div>
     </div>
-    <listMovies class="pb-3"/>
+    <HomeMovies class="pb-3"/>
     <Footer/>
   </div>
 </template>
 
 <script>
-  import listMovies from "../components/home/homeMovies";
   import AnimatedNumber from "animated-number-vue";
   import Footer from "~/components/shared/Footer";
+  import HomeMovies from "@/components/home/homeMovies";
 
   export default {
     components: {
       Footer,
-      listMovies,
+      HomeMovies,
       AnimatedNumber
     },
     data() {

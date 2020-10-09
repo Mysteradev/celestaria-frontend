@@ -11,7 +11,7 @@
           <div class="media-content">
             <p class="title is-5">{{ title }}</p>
           </div>
-          <div v-if="showFullscreenButton" class="media-right clickable">
+          <div class="media-right clickable">
             <span class="icon rounded-icon" @click="openLightbox">
               <FontAwesomeIcon :icon="['fas', 'compress']"/>
             </span>
@@ -48,9 +48,6 @@
           type: String,
           required: true
         },
-        showFullscreenButton: {
-          type: Boolean
-        }
       },
       computed: mapGetters({
         activeVideo: 'movieMaker/getActiveVideo'

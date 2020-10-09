@@ -29,7 +29,7 @@
 import {mapActions} from 'vuex';
 
 export default {
-  name: "RecapVideoMaker",
+  name: "RecapMovieMaker",
   data() {
     return {
       inputContent: '',
