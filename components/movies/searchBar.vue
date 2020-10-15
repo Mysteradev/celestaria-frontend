@@ -5,14 +5,15 @@
       <input class="input flat-input" type="text" id="searchByTitle" placeholder="Un voyage qui à mal tourné..." v-model="search">
     </div>
     <div class="control">
-      <a href="#" class="button rounded-button">
+      <NuxtLink :to="`/search=${search}&page=1`" @click.native="fetchMovies(search)" class="button rounded-button">
         <FontAwesomeIcon :icon="['fas', 'search']"/>
-      </a>
+      </NuxtLink>
     </div>
   </div>
 </template>
 
 <script>
+import { mapActions } from "vuex";
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import { library } from "@fortawesome/fontawesome-svg-core";
@@ -23,6 +24,11 @@ export default {
   name: "searchBar",
   components: {
     FontAwesomeIcon,
+  },
+  methods: {
+    ...mapActions({
+      fetchMovies: 'listMovies/FETCH_MOVIES_BY_CRITERIA'
+    })
   },
   data() {
     return {

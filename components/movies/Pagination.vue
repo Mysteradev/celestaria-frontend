@@ -1,7 +1,7 @@
 <template>
   <nav class="pagination is-centered pb-5" role="navigation" aria-label="pagination">
     <NuxtLink :to="`/movies/${getPreviousPage}`" class="pagination-previous" :disabled="getCurrentPage < 2">Précédent</NuxtLink>
-    <a class="pagination-next">Suivant</a>
+    <NuxtLink class="pagination-next" :to="`/movies/${getNextPage}`">Suivant</NuxtLink>
     <ul class="pagination-list">
       <li>
         <NuxtLink :to="`/movies/${getPreviousPage}`" class="pagination-link" :aria-label="`Aller à la page ${getPreviousPage}`">{{getPreviousPage}}</NuxtLink>
