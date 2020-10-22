@@ -17,7 +17,7 @@
 </template>
 
 <script>
-import { mapGetters, mapMutations } from "vuex";
+import { mapGetters, mapMutations, mapActions } from "vuex";
 export default {
   name: "Pagination",
   computed: {
@@ -48,6 +48,9 @@ export default {
   methods: {
     ...mapMutations({
       setCurrentPage: 'listMovies/SET_CURRENT_PAGE'
+    }),
+    ...mapActions({
+      fetchMovies: 'listMovies/FETCH_MOVIES'
     })
   },
   mounted() {
@@ -58,6 +61,7 @@ export default {
   watch: {
     $route() {
       this.setCurrentPage(this.$route.params.page);
+      this.fetchMovies("movies");
     }
   }
 }

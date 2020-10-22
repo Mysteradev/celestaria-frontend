@@ -18,6 +18,11 @@ import SearchBar from "@/components/movies/searchBar";
 
 export default {
   name: "movies",
+  head() {
+    return {
+      title: "Les films - Celestaria"
+    }
+  },
   components: {
     SearchBar,
     ListMovies,
