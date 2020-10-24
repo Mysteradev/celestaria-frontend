@@ -23,6 +23,13 @@ export default {
     ;
   },
 
+  /**
+   * Fetch the movies from database based on a criteria
+   * @param commit
+   * @param criteria
+   * @returns {Promise<void>}
+   * @constructor
+   */
   FETCH_MOVIES_BY_CRITERIA: async function({commit}, criteria) {
     commit('SET_LOADING', true);
     await this.$axios.$get(`http://localhost:8000/api/movies?title=${criteria}`)
