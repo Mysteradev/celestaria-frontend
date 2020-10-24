@@ -1,16 +1,18 @@
 <template>
   <nav class="pagination is-centered pb-5" role="navigation" aria-label="pagination">
-    <NuxtLink :to="`/movies/${getPreviousPage}`" class="pagination-previous" :disabled="getCurrentPage < 2">Précédent</NuxtLink>
-    <NuxtLink class="pagination-next" :to="`/movies/${getNextPage}`">Suivant</NuxtLink>
+    <NuxtLink v-if="getPreviousPage > 0" :to="`/movies/${getPreviousPage}`" class="pagination-previous" :disabled="getCurrentPage < 2">Précédent</NuxtLink>
+    <button v-else class="pagination-previous" disabled>Précédent</button>
+    <NuxtLink v-if="!(getNextPage > getMaxPage)" class="pagination-next" :to="`/movies/${getNextPage}`">Suivant</NuxtLink>
+    <button v-else class="pagination-next" disabled>Suivant</button>
     <ul class="pagination-list">
       <li>
-        <NuxtLink :to="`/movies/${getPreviousPage}`" class="pagination-link" :aria-label="`Aller à la page ${getPreviousPage}`">{{getPreviousPage}}</NuxtLink>
+        <NuxtLink :to="`/movies/${getPreviousPage === 0 ? getCurrentPage : getPreviousPage}`" class="pagination-link" :class="{ 'is-current': getCurrentPage === 1 }" :aria-label="`Aller à la page ${getPreviousPage}`">{{ getPreviousPage === 0 ? getCurrentPage : getPreviousPage }}</NuxtLink>
       </li>
       <li>
-        <NuxtLink :to="`/movies/${getCurrentPage}`" class="pagination-link is-current" :aria-label="`Page ${getCurrentPage}`" aria-current="page">{{getCurrentPage}}</NuxtLink>
+        <NuxtLink :to="`/movies/${getPreviousPage !== 0 ? getCurrentPage : getNextPage}`" class="pagination-link" :class="{ 'is-current': getCurrentPage > 1}" :aria-label="`Page ${getCurrentPage}`" aria-current="page">{{ getPreviousPage !== 0 ? getCurrentPage : getNextPage }}</NuxtLink>
       </li>
       <li>
-        <NuxtLink :to="`/movies/${getNextPage}`" @click.native="setCurrentPage(getCurrentPage)" class="pagination-link" :aria-label="`Aller à la page ${getNextPage}`">{{getNextPage}}</NuxtLink>
+        <NuxtLink :to="`/movies/${getPreviousPage !== 0 ? getNextPage : getNextPage + 1}`" @click.native="setCurrentPage(getCurrentPage)" class="pagination-link" :aria-label="`Aller à la page ${getNextPage}`">{{ getPreviousPage !== 0 ? getNextPage : getNextPage + 1 }}</NuxtLink>
       </li>
     </ul>
   </nav>
@@ -22,7 +24,8 @@ export default {
   name: "Pagination",
   computed: {
     ...mapGetters({
-      getCurrentPage: 'listMovies/getCurrentPage'
+      getCurrentPage: 'listMovies/getCurrentPage',
+      getMaxPage: 'listMovies/getMaxPage'
     }),
 
     /**
@@ -42,7 +45,7 @@ export default {
         return Number(this.getCurrentPage) - 1;
       }
 
-      return 1;
+      return 0;
     }
   },
   methods: {

@@ -35,7 +35,8 @@ export default {
   },
   computed:
     mapGetters({
-      'movies': 'listMovies/getMovies'
+      'movies': 'listMovies/getMovies',
+      'isLoading': 'listMovies/getIsLoading'
     })
 }
 </script>

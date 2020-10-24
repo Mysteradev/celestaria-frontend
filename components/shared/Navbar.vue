@@ -59,9 +59,7 @@
   }
 
   .navbar-item {
-    &:hover {
-      background: none;
-    }
+    background: none !important;
   }
 </style>
 
