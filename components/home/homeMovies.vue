@@ -6,33 +6,32 @@
       </div>
     </div>
     <div class="columns" >
-      <div class="column" v-for="video in videos">
-        <p class="has-text-centered">{{ video.author }}</p>
-        <a :href="video.download_url">
-          <img :src="video.download_url" alt="Miniature d'un chapitre vidéo">
-        </a>
-      </div>
+      <MovieCard class="column" v-for="movie in movies" :thumbnail-url="movie.download_url" :id="movie.id" :title="movie.author" :key="movie.id"></MovieCard>
     </div>
   </div>
 </template>
 <script>
 
+//TODO delete this component and use the shared one
+
+import MovieCard from "@/components/shared/movie/movieCard";
 export default {
-  name: "listfilm",
+  name: "homeMovies",
+  components: {MovieCard},
   data() {
     return {
-      videos: {}
+      movies: {}
     }
   },
   methods: {
-    async getVideo() {
+    async getMovies() {
      await this.$axios.$get('https://picsum.photos/v2/list?limit=4')
-        .then(response => (this.videos = response))
+        .then(response => (this.movies = response))
         .catch(error => console.log(error));
     }
   },
-  mounted() {
-    this.getVideo();
+  created() {
+    this.getMovies();
   }
 }
 </script>

@@ -23,7 +23,7 @@
 </template>
 
 <script>
-    import { mapState, mapMutations } from 'vuex';
+    import { mapGetters, mapMutations } from 'vuex';
     import { faCompress } from '@fortawesome/free-solid-svg-icons';
     import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
     import { library } from "@fortawesome/fontawesome-svg-core";
@@ -47,14 +47,14 @@
         thumbnailUrl: {
           type: String,
           required: true
-        }
+        },
       },
-      computed: mapState([
-        'activeVideo'
-      ]),
+      computed: mapGetters({
+        activeVideo: 'movieMaker/getActiveVideo'
+      }),
       methods: {
         ...mapMutations({
-          setActiveVideo: 'SET_ACTIVE_VIDEO'
+          setActiveVideo: 'movieMaker/SET_ACTIVE_VIDEO'
         }),
         openLightbox() {
           this.$emit("event-open-lightbox");
@@ -68,12 +68,14 @@
 
 <style lang="scss" scoped>
   .card {
+    background-color: #f8f8f8;
     height: 100%;
     transition: .5s;
-    border-radius: 5px;
+    border-radius: 10px;
+    cursor: pointer;
 
     img {
-      border-radius: 5px 5px 0 0;
+      border-radius: 10px 10px 0 0;
     }
 
     &:hover {
@@ -90,6 +92,8 @@
   }
 
   .selected {
-    box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+    transform: translateY(-2px);
+    box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 5px 5px rgba(0,0,0,0.22);
+    background: white;
   }
 </style>

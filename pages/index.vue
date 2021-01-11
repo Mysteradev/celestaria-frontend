@@ -74,27 +74,31 @@
         </div>
         <div class="column has-text-centered">
           <div class="white-card">
-          <p class="has-text-weight-bold pb-5">Visionnez et partagez le !</p>
-          <figure class="is-inline-block pb-5">
-            <img :src="require('@/assets/img/share.svg')" alt="Key" class="image anime-img is-64x64">
-          </figure>
-          <p>Visionnez votre film et partagez le à vos amis !</p>
+            <p class="has-text-weight-bold pb-5">Visionnez et partagez le !</p>
+            <figure class="is-inline-block pb-5">
+              <img :src="require('@/assets/img/share.svg')" alt="Key" class="image anime-img is-64x64">
+            </figure>
+            <p>Visionnez votre film et partagez le à vos amis !</p>
           </div>
         </div>
       </div>
     </div>
-    <listfilm class="pb-3"/>
+    <HomeMovies class="pb-3"/>
     <Footer/>
   </div>
 </template>
 
 <script>
-  import listfilm from "../components/home/listFilm";
   import AnimatedNumber from "animated-number-vue";
   import Footer from "~/components/shared/Footer";
+  import HomeMovies from "@/components/home/homeMovies";
 
   export default {
-    components: {Footer, listfilm, AnimatedNumber},
+    components: {
+      Footer,
+      HomeMovies,
+      AnimatedNumber
+    },
     data() {
       return {
         film: 93898,

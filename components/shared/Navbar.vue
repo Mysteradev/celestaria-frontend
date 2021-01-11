@@ -2,7 +2,7 @@
     <div class="container pt-2">
       <nav class="navbar is-spaced" role="navigation" aria-label="main navigation">
         <div class="navbar-brand">
-          <a class="navbar-item" href="">
+          <a class="navbar-item" href="/">
             Celestaria
           </a>
           <div role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample" @click="isOpen = !isOpen" :class="{ 'is-active': isOpen }">
@@ -20,10 +20,10 @@
             <a class="navbar-item">
               Contact
             </a>
-            <NuxtLink to="/" class="navbar-item">
+            <NuxtLink to="/movieMaker" class="navbar-item">
               <button class="button is-link is-light">Créer mon film →</button>
             </NuxtLink>
-            <NuxtLink to="lesFilms" class="navbar-item">
+            <NuxtLink to="/movies" class="navbar-item">
               <button class="button is-blank is-link">Voir les films</button>
             </NuxtLink>
           </div>
@@ -54,14 +54,12 @@
     &.is-blank {
       color: #2160c4;
       background: none;
-      box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 3px 5px 0 rgba(0, 0, 0, 0.19)
+      box-shadow: 0 1px 3px 0 rgba(0,0,0,.1), 0 1px 2px 0 rgba(0,0,0,.06);
     }
   }
 
   .navbar-item {
-    &:hover {
-      background: none;
-    }
+    background: none !important;
   }
 </style>
 
